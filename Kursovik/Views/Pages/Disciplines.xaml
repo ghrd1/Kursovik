@@ -1,0 +1,78 @@
+﻿<Page x:Class="Kursovik.Views.Pages.Disciplines"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:local="clr-namespace:Kursovik.Views.Pages"
+      xmlns:vm="clr-namespace:Kursovik.ViewModels.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Disciplines">
+    <Page.DataContext>
+        <vm:DisciplinesVM/>
+    </Page.DataContext>
+
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="{Binding Size}"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="disciplinesListView"
+                  ItemsSource="{Binding Disciplines}"
+                  Grid.Row="0"
+                  Background="Gray">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding ShowParameterDisciplineCommand}"
+                                           CommandParameter="{Binding SelectedItem, ElementName=disciplinesListView}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id"
+                                    DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Назва"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Класс"
+                                    DisplayMemberBinding="{Binding Room}"/>
+                    <GridViewColumn Header="Дата початку"
+                                    DisplayMemberBinding="{Binding StartDate}"/>
+                    <GridViewColumn Header="Дата кінця"
+                                    DisplayMemberBinding="{Binding EndDate}"/>
+                    <GridViewColumn Header="Години"
+                                    DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Кількість вчителів"
+                                    DisplayMemberBinding="{Binding Count}"/>
+                    <GridViewColumn Header="Зайнятість"
+                                    DisplayMemberBinding="{Binding Busy}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Створити"
+                    Command="{Binding AddNewDisciplineCommand}"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="5"
+                    Width="100" Height="25"/>
+            <Button Content="Видалити"
+                    Command="{Binding DeleteDisciplineCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=disciplinesListView}"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="100" Height="25"/>
+        </Grid>
+    </Grid>
+</Page>

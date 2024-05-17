@@ -1,0 +1,65 @@
+﻿<Page x:Class="Kursovik.Views.Pages.Positions"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kursovik.Views.Pages"
+      xmlns:vm="clr-namespace:Kursovik.ViewModels.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Positions">
+    <Page.DataContext>
+        <vm:PositionsVM/>
+    </Page.DataContext>
+
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="positionsListView" 
+                  ItemsSource="{Binding Positions}" 
+                  Background="Gray"
+                  Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id"
+                                    DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Назва"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Додати"
+                    Command="{Binding AddNewPositionCommand}"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="100" Height="25"/>
+            <Button Content="Видалити"
+                    Command="{Binding DeletePositionCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=positionsListView}"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="100" Height="25"/>
+            <Button Content="Змінити"
+                    Command="{Binding EditPositionCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=positionsListView}"
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="100" Height="25"/>
+        </Grid>
+    </Grid>
+</Page>

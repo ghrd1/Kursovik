@@ -1,0 +1,49 @@
+﻿<Window x:Class="Kursovik.Views.Manage.DisciplineManage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursovik.Views.Manage"
+        xmlns:vm="clr-namespace:Kursovik.ViewModels.Manage"
+        mc:Ignorable="d"
+        Title="DisciplineManage" Height="200" Width="300">
+    <Window.DataContext>
+        <vm:DisciplineManageVM/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Введіть назву предмета:"
+               Grid.Row="0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding DisciplineName}"
+                 Grid.Row="1"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 Width="250" Height="25"/>
+        <Label Content="Виберіть основну посаду:"
+               Grid.Row="2"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <ComboBox ItemsSource="{Binding Positions}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding SelectedPosition}"
+                  Grid.Row="3"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Width="250" Height="25"/>
+        <Button Content="Підтвердити"
+                Command="{Binding ConfirmAddDisciplineCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                Grid.Row="4"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="150" Height="25"/>
+    </Grid>
+</Window>
